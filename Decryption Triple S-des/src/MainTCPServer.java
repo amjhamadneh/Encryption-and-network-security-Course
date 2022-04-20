@@ -22,9 +22,8 @@ public class MainTCPServer {
             System.out.println("Unable to connect to port ...");
             System.exit(1);
         }
-        do {
-            handleClient();
-        } while (true);
+
+        handleClient();
     }
 
     private static void handleClient() {
@@ -36,8 +35,7 @@ public class MainTCPServer {
             InputStream recivedCiphertext = link.getInputStream();
             InputStreamReader isr = new InputStreamReader(recivedCiphertext);
             BufferedReader br = new BufferedReader(isr);
-            PrintWriter output = new PrintWriter(link.getOutputStream(), true);
-            String message = br.readLine();// step4
+            String message = br.readLine();
             System.out.println("ciphertext received : " + message);
 
             Scanner input = new Scanner(System.in);
@@ -83,8 +81,7 @@ public class MainTCPServer {
             int[] ciphertext2 = obj3.decryption(decrypted);
             print("Your decrypted text is :", ciphertext2, 8);
 
-            br.close();// step5
-            output.close();// step5
+            br.close();
         } catch (IOException i) {
             System.out.println("massege not received");
             System.exit(1);
@@ -100,6 +97,7 @@ public class MainTCPServer {
         }
 
     }
+
     public static void print(String s, int[] arr, int n) {
         System.out.println(s);
         for (int i = 0; i < n; ++i) {
